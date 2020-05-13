@@ -60,31 +60,42 @@ class Solution {
         }
         return value;
     }
-    */
+    */            
     
     
-    // Another Approach O(logn)
+    // Better One -  O(logn)
+    
     public int singleNonDuplicate(int[] nums) {
         
-        int l=0, r=nums.length-1;
-        while(true){
-            int m=(l+r)/2;
-            if(m+1<nums.length && nums[m]==nums[m+1]){
-                if((r-m)%2==0){
-                    l=m+2;
+        int left = 0; 
+        int right = nums.length-1;
+        
+        while(left<right){
+            
+            int mid = left + (right - left)/2;
+            boolean check_if_halves_are_even = (right - mid) % 2 == 0;
+            
+            if(nums[mid+1] == nums[mid]){
+                
+                if(check_if_halves_are_even){
+                    left = mid + 2;
                 }else{
-                    r=m-1;
+                    right = mid - 1;                    
                 }
-            }else if(m-1>=0 && nums[m]==nums[m-1]){
-                if((r-m)%2==0){
-                    r=m-2;
+                
+            }else if(nums[mid - 1] == nums[mid]){
+                
+                if(check_if_halves_are_even){
+                    right = mid - 2;
                 }else{
-                    l=m+1;
+                    left = mid + 1;
                 }
+                
             }else{
-                return nums[m];
+                return nums[mid];
             }
         }
+        return nums[left];
     }
     
 }
