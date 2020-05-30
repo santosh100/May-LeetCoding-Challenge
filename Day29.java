@@ -49,6 +49,7 @@ class Solution {
             }
         }
  
+		// if count and numCourses are equal then return true else return false
         return count == numCourses;
     }
 }
